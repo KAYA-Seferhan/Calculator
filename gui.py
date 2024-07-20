@@ -1,8 +1,25 @@
 import tkinter
+import os
+import sys
+
+
+def resource_path(relative_path):
+    """ Get absolute path to resource, works for dev and for PyInstaller """
+    try:
+        # PyInstaller creates a temp folder and stores path in _MEIPASS
+        base_path = sys._MEIPASS
+    except Exception:
+        base_path = os.path.abspath(".")
+
+    return os.path.join(base_path, relative_path)
+
+
+icon_path = resource_path("icon.ico")
 
 main_window = tkinter.Tk()
 main_window.title("Calculator")
 main_window.geometry("600x700")
+main_window.iconbitmap(icon_path)
 main_window.config(background="#242424")
 
 result_frame = tkinter.Frame(main_window)
